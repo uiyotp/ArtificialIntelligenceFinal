@@ -1,11 +1,11 @@
 # Artificial Intelligence Final
-Final project for CompSci 332.  We need to come up with a project name and idea.
+>Final project for CompSci 332.  We need to come up with a project name and idea.
 ## Basic Information
 >By: Solomon Paprocki and Trent *What is your last name?*
 
-Language used: Java
+>Language used: Java
 
-Also give a name to your project to help differentiate it from other submissions (so we don't have a dozen groups presenting "Semester Project").
+>Also give a name to your project to help differentiate it from other submissions (so we don't have a dozen groups presenting "Semester Project").
 
 ## Minimum Viable Product
 
