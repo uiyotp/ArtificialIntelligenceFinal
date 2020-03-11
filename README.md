@@ -19,15 +19,19 @@
 
 >As a developer, I want the AI to choose the best move every turn (working AI)
 ## Stretch Goals
->As a user, I want to be able to play on multiple grids, such as a 3x3 grid as well (expansion of the AI)
-
->As a developer, I want to create an AI that can play on up to a 5x5 box grid (Additional expansion to include 4x4 and 5x5)
+>As a user, I want to be able to play on larger grids, such as a 3x3 grid as well (expansion of the AI)
 
 >As a user, I want a game mode that shows what the computers next move will be (Practice Mode)
 
 >As a user, I want to be able to play with a friend and the computer (3 player Game Mode)
 
 >As a user, I want to play on whatever size grid I want (Configure AI to handle any size grid and add the option in settings)
+
+>As a user, I want a difficulty setting so that I don't always lose (Add difficulties in the settings)
+
+>As a user, I want variance in the AI so that it doesn't always make the same move (Best move variance)
+
+>As a developer, I want to implement Alpha-Beta pruning in order to have a more effiecient AI (add Alpha-Beta Pruning)
 ## Timeline
 >Week of 3/16: Start the development of AI and figure out how to create a GUI for the game
 
