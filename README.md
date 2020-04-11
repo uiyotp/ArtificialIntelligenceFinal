@@ -33,23 +33,17 @@
 
 >As a developer, I want to implement Alpha-Beta pruning in order to have a more effiecient AI (add Alpha-Beta Pruning)
 ## Timeline
->Week of 3/16: Start the development of AI and figure out how to create a GUI for the game
+>Week of 4/6: Create the MiniMax Algorithm and get a GUI outline for the game ready
 
->Week of 3/23: Finish programming the AI with the rules of the game and get a GUI outline for the game ready
+>Week of 4/13: Add the rules of the game into the MiniMax Algorithm and finish basic GUI
 
->Week of 3/30: Finish up the original version of the AI and integrate it into the GUI
+>Week of 4/20: Integrate the GUI into the game and implement Alpha-Beta Pruning
 
->Week of 4/6: Configure AI to work on 3x3 grids and work on a menu with start and settings options for GUI
+>Week of 4/27: Create Start Menu for the game and program difficulty settings into the program
 
->Week of 4/13: Finish up AI work on larger grids(maybe even any size grid), figure out expanding grids on the GUI
+>Week of 5/4: Create and implement a settings tab on the GUI, include game difficulties.  Also, implement variance.
 
->Week of 4/20: Start figuring out how to implement practice mode and integrate the GUI with the larger grid options
-
->Week of 4/27: Finsih up programming practice mode and figure out how the GUI will display the next move
-
->Week of 5/4: Create 3 player game mode and tidy up the settings and the rest of the GUI
-
->Week of 5/11: Make sure every works as expected, fix any issues, and get ready to present project
+>Week of 5/11: Make sure every works as expected, fix any issues
 ## Group Roles
 >Solomon Paprocki: Leads the development of the Artificial Intelligence aspect of the game.
 
