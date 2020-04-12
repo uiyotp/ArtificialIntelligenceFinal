@@ -33,9 +33,9 @@
 
 >As a developer, I want to implement Alpha-Beta pruning in order to have a more effiecient AI (add Alpha-Beta Pruning)
 ## Timeline
->Week of 4/6: Create the MiniMax Algorithm and get a GUI outline for the game ready
+>Week of 4/6: Create the game rules to implement into MiniMax and get a GUI outline for the game ready
 
->Week of 4/13: Add the rules of the game into the MiniMax Algorithm and finish basic GUI
+>Week of 4/13: Finish the MiniMax Algorithm and finish basic GUI
 
 >Week of 4/20: Integrate the GUI into the game and implement Alpha-Beta Pruning
 
