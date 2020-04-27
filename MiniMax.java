@@ -38,28 +38,38 @@ public class MiniMax{
 
     public static State deepCopyState(State state){
         State copiedState = new State();
-        int[][] board = new int[5][];
+        int[][] board = {
+                {0,0},
+                {0,0,0},
+                {0,0},
+                {0,0,0},
+                {0,0}
+            };
         Player[][] boxes = new Player[2][2];
         Player[] players = new Player[2];
+        int[][] boardToCopy = state.getBoard();
+        Player[][] boxesToCopy = state.getBoxes();
         for(int i=0;i<5;i++){
             if(i%2==0){
                 for(int j=0;j<2;j++){
-                    copiedState.board[i][j]=state.board[i][j];
+                    board[i][j]=boardToCopy[i][j];
                 }
             }else{
                 for(int j=0;j<3;j++){
-                    copiedState.board[i][j]=state.board[i][j];
+                    board[i][j]=boardToCopy[i][j];
                 }
             }
 
         }
         for(int i=0;i<2;i++){
             for(int j=0;j<2;j++){
-                copiedState.boxes[i][j]=state.boxes[i][j];
+                boxes[i][j]=boxesToCopy[i][j];
             }
         }
-        copiedState.players = state.players;
-        copiedState.currentPlayer = state.currentPlayer;
+        copiedState.setBoard( board );
+        copiedState.setBoxes( boxes );
+        copiedState.setPlayers( state.getPlayers() );
+        copiedState.setCurrentPlayer( state.getCurrentPlayer() );
         return copiedState;
     }
 }

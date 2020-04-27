@@ -1,10 +1,10 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList; 
 public class State{
-    int[][] board = new int[5][];
-    Player[][] boxes = new Player[2][2];
-    Player currentPlayer;
-    Player[] players = new Player[2];
+    private int[][] board = new int[5][];
+    private Player[][] boxes = new Player[2][2];
+    private Player currentPlayer;
+    private Player[] players = new Player[2];
     public State(){
         int[][] board = {
                 {0,0},
@@ -26,6 +26,38 @@ public class State{
         this.board = board;
         this.boxes = boxes;
         this.players = players;
+        this.currentPlayer = currentPlayer;
+    }
+
+    public int[][] getBoard(){
+        return board;
+    }
+    
+    public void setBoard(int[][] board){
+        this.board = board;
+    }
+
+    public Player[][] getBoxes(){
+        return boxes;
+    }
+    
+    public void setBoxes(Player[][] boxes){
+        this.boxes = boxes;
+    }
+
+    public Player[] getPlayers(){
+        return players;
+    }
+    
+    public void setPlayers(Player[] players){
+        this.players = players;
+    }
+
+    public Player getCurrentPlayer(){
+        return currentPlayer;
+    }
+    
+    public void setCurrentPlayer(Player currentPlayer){
         this.currentPlayer = currentPlayer;
     }
 
@@ -77,7 +109,7 @@ public class State{
     }
 
     public void makeMove(int[] move){
-        System.out.println(currentPlayer.name);
+        System.out.println(currentPlayer.getName() + " made the move:");
         System.out.println(move[0]+", "+move[1]);
         if(board[move[0]][move[1]]==0){
             board[move[0]][move[1]]++;
@@ -91,10 +123,6 @@ public class State{
         }else{
             System.out.println("NOT A VALID MOVE!!!");
         }
-    }
-
-    public Player getCurrentPlayer(){
-        return currentPlayer;
     }
 
     public boolean isTerminal(){
@@ -144,6 +172,7 @@ public class State{
         }
         return newBox;
     }
+
     @Override
     public String toString(){
         String box1;
@@ -153,25 +182,24 @@ public class State{
         if(boxes[0][0]==null){
             box1 = null;
         }else{
-            box1 = boxes[0][0].name;
+            box1 = boxes[0][0].getName();
         }
-                if(boxes[0][1]==null){
+        if(boxes[0][1]==null){
             box2 = null;
         }else{
-            box2 = boxes[0][1].name;
+            box2 = boxes[0][1].getName();
         }
-                if(boxes[1][0]==null){
+        if(boxes[1][0]==null){
             box3 = null;
         }else{
-            box3 = boxes[1][0].name;
+            box3 = boxes[1][0].getName();
         }
-                if(boxes[1][1]==null){
+        if(boxes[1][1]==null){
             box4 = null;
         }else{
-            box4 = boxes[1][1].name;
+            box4 = boxes[1][1].getName();
         }
-                    
-                    
-        return String.format("%d %d%n%s %s%n%d %d %d%n%d %d%n%d %d %d%n%s %s%n%d %d",board[0][0],board[0][1],box1,box2,board[1][0],board[1][1],board[1][2],board[2][0],board[2][1],board[3][0],board[3][1],board[3][2],box3,box4,board[4][0],board[4][1]);
+
+        return String.format("   %d      %d%n%d %s %d %s %d%n   %d      %d%n%d %s %d %s %d%n   %d      %d",board[0][0],board[0][1],board[1][0],box1,board[1][1],box2,board[1][2],board[2][0],board[2][1],board[3][0],box3,board[3][1],box4,board[3][2],board[4][0],board[4][1]);
     }
 }
