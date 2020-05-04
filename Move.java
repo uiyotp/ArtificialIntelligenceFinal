@@ -28,10 +28,10 @@ public class Move{
     @Override 
     public String toString(){
         if(play==null){
-            return "No move found, too early in game.";
+            return "Go anywhere on the board.";
         }
         else{
-            return String.format("Play: %d, %d Score: %f",play[0],play[1],score);
+            return String.format("%d, %d",play[0],play[1]);
         }
     }
 }

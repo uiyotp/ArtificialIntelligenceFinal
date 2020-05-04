@@ -1,39 +1,73 @@
 public class MiniMax{
-    public static Move MiniMax(State state, Player player, int maxDepth, int currentDepth){
+    public static Move MiniMax(State state, Player player, double alpha, double beta){
         Move bestMove = new Move();
         Move currentMove = new Move();
-        if( state.isTerminal() || currentDepth == maxDepth ){
-            System.out.println(state.toString());
-            bestMove.setScore(state.evaluate( player ));
-            bestMove.setPlay(null);
+        double bestVal;
+        if(state.isTerminal()){
+            bestMove = new Move(null, state.evaluate( player ));
+            return bestMove;
+        }       
+        if( state.getCurrentPlayer() == player ){
+            bestVal = Double.MIN_VALUE;
+            int[][] possibleMoves = state.getMoves();
+            for(int i = 0; i<possibleMoves.length; i++){
+                State newState = deepCopyState(state);
+                newState.makeMove( possibleMoves[i] );
+                currentMove = MiniMax( newState , player, alpha, beta);
+                if(bestVal<=currentMove.getScore()){
+                    bestMove.setScore(currentMove.getScore());
+                    bestMove.setPlay(possibleMoves[i]);
+                    bestVal = currentMove.getScore();
+                }
+                if(alpha<bestVal){
+                    alpha = bestVal;
+                }
+                if(beta <= alpha){
+                    break;
+                }
+            }
             return bestMove;
         }
-        if( state.getCurrentPlayer() == player )
-            bestMove.setScore(Double.MIN_VALUE);
-        else
-            bestMove.setScore(Double.MAX_VALUE);
-        System.out.println(state.toString());
-        int[][] possibleMoves = state.getMoves();
-        for(int i = 0; i<possibleMoves.length; i++){
-            State newState = deepCopyState(state);
-            newState.makeMove( possibleMoves[i] );
-            currentMove = MiniMax( newState , player, maxDepth , currentDepth + 1 );
-
-            if( state.getCurrentPlayer() == player ){
-                if(currentMove.getScore() > bestMove.getScore() ){
+        else{
+            bestVal = Double.MAX_VALUE;
+            int[][] possibleMoves = state.getMoves();
+            for(int i = 0; i<possibleMoves.length; i++){
+                State newState = deepCopyState(state);
+                newState.makeMove( possibleMoves[i] );
+                currentMove = MiniMax( newState , player, alpha, beta);
+                if(bestVal>=currentMove.getScore()){
                     bestMove.setScore(currentMove.getScore());
                     bestMove.setPlay(possibleMoves[i]);
+                    bestVal = currentMove.getScore();
+                }
+                if(beta>bestVal){
+                    beta = bestVal;
+                }
+                if(beta <= alpha){
+                    break;
                 }
             }
-            else{
-                if(currentMove.getScore() < bestMove.getScore() ){
-                    bestMove.setScore(currentMove.getScore());
-                    bestMove.setPlay(possibleMoves[i]);
-                }
-            }
+            return bestMove;
         }
 
-        return bestMove;
+        // for(int i = 0; i<possibleMoves.length; i++){
+        // State newState = deepCopyState(state);
+        // newState.makeMove( possibleMoves[i] );
+        // currentMove = MiniMax( newState , player, maxDepth , currentDepth + 1 );
+
+        // if( state.getCurrentPlayer() == player ){
+        // if(currentMove.getScore() > bestMove.getScore() ){
+        // bestMove.setScore(currentMove.getScore());
+        // bestMove.setPlay(possibleMoves[i]);
+        // }
+        // }
+        // else{
+        // if(currentMove.getScore() < bestMove.getScore() ){
+        // bestMove.setScore(currentMove.getScore());
+        // bestMove.setPlay(possibleMoves[i]);
+        // }
+        // }
+        // }
     }
 
     public static State deepCopyState(State state){

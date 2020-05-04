@@ -19,7 +19,6 @@ public class State{
         Player computer = new Player("computer");
         Player[] players = {user,computer};
         this.players = players;
-        currentPlayer = players[0];
     }
 
     public State(int[][] board, Player[][] boxes, Player[] players, Player currentPlayer){
@@ -87,12 +86,9 @@ public class State{
 
         }
         int[][] finalMoves = new int[moveCount][];
-        System.out.println("AVAILABLE MOVES:");
         for(int i = 0; i<moveCount; i++){
             finalMoves[i] = moves[i];
-            System.out.println(moves[i][0]+", "+moves[i][1]);
         }
-        System.out.println("---------------------------");
         return finalMoves;
     }
 
@@ -109,8 +105,6 @@ public class State{
     }
 
     public void makeMove(int[] move){
-        System.out.println(currentPlayer.getName() + " made the move:");
-        System.out.println(move[0]+", "+move[1]);
         if(board[move[0]][move[1]]==0){
             board[move[0]][move[1]]++;
             if(!checkBoxes()){
@@ -126,8 +120,15 @@ public class State{
     }
 
     public boolean isTerminal(){
-        int[][] moves = getMoves();
-        if(moves.length == 0){
+        int boxCount=0;
+        for(int i=0;i<2;i++){
+            for(int j=0;j<2;j++){
+                if(boxes[i][j] != null){
+                    boxCount++;
+                }
+            }
+        }
+        if(boxCount==4){
             return true;
         }
         return false;
