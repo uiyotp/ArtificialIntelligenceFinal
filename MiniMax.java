@@ -1,3 +1,4 @@
+package DandB;
 public class MiniMax{
     public static Move MiniMax(State state, Player player, double alpha, double beta){
         Move bestMove = new Move();

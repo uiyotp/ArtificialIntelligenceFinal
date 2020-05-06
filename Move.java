@@ -1,3 +1,4 @@
+package DandB;
 public class Move{
     private int[] play;
     private double score;

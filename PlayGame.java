@@ -1,10 +1,25 @@
+package DandB;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import java.awt.event.*;
 import java.util.Random;
 public class PlayGame{
     public static void main(String args[]){
+    	
         Random rand = new Random();
-        int move;
+        String First = "";
         Scanner input = new Scanner(System.in);
+        int[] userPlay = {-1,-1};
+        Page1 window = new Page1();
+        Player user = new Player("user");
+        Player COM = new Player("COM");
+        Player[] players = {user,COM};
+        Player[][] boxes = {{null,null},{null,null}};
         int[][] board = {
                 {0,0},
                 {0,0,0},
@@ -12,44 +27,29 @@ public class PlayGame{
                 {0,0,0},
                 {0,0}
             };
-        int[] userPlay = {-1,-1};
-        Player user = new Player("user");
-        Player COM = new Player("COM");
-        Player[] players = {user,COM};
-        Player[][] boxes = {{null,null},{null,null}};
+
         State currentState;
-        boolean firstMove = true;
-        System.out.println("Do you want to go first? (yes or no) NOTE: If you do not go first, then the game will be harder to win.");
-        switch(input.nextLine()){
+        //System.out.println("Do you want to go first? (yes or no) NOTE: If you do not go first, then the game will be harder to win.");
+        switch(First){
             case "yes":
             currentState = new State(board, boxes, players, user);
             break;
             default:
             currentState = new State(board, boxes, players, COM);
-        }
-        boolean practiceMode;
-        System.out.println("Do you want to play in practice mode? (yes or no) NOTE: Practice mode shows you what the computer would do in your situation.");
-        switch(input.nextLine()){
-            case "yes":
-            practiceMode = true;
-            break;
-            default:
-            practiceMode = false;
-        }
         while(!currentState.isTerminal()){
             int[][] getMoves = currentState.getMoves();
             switch(currentState.getCurrentPlayer().getName()){
                 case "user":
                 System.out.println("--------------------------------------------------");
                 System.out.println(currentState);
-                if(practiceMode){
-                    if(firstMove){
+                if(practiceMode.GetPracticeMode()){
+                    if(firstMove.GetFirstMove()){
                         //Ran the program with 12 depth and waited 5 minutes for the best move.  It was 4,1 and then I chose the three equivalent moves
                         //and added them to the possible moves array to speed up the program on the first iteration
                         int[][] possibleMoves = {{0,0},{1,2},{3,0},{4,1}};
-                        move = rand.nextInt(possibleMoves.length);
-                        Move recentMove = new Move(possibleMoves[move],0);
-                        firstMove=false;
+                        move.setMove(rand.nextInt(possibleMoves.length)); 
+                        Move recentMove = new Move(possibleMoves[move.GetMove()],0);
+                        firstMove.setFirstMove(false);;
                         System.out.println("This is what the computer would do in your situation: "+recentMove);
                     }
                     else if(getMoves.length<10){
@@ -66,27 +66,27 @@ public class PlayGame{
                 int y = input.nextInt();
                 userPlay[1] = y;
                 currentState.makeMove(userPlay);
-                firstMove=false;
+                firstMove.setFirstMove(false);;
                 break;
                 case "COM":
                 if(currentState.getCurrentPlayer().getName().equals("COM")){
-                    if(firstMove==true){
+                    if(firstMove.GetFirstMove()==true){
                         //Ran the program with 12 depth and waited 5 minutes for the best move.  It was 4,1 and then I chose the three equivalent moves
                         //and added them to the possible moves array to speed up the program on the first iteration
                         int[][] possibleMoves = {{0,0},{1,2},{3,0},{4,1}};
-                        move = rand.nextInt(possibleMoves.length);
-                        currentState.makeMove(possibleMoves[move]);
-                        Move recentMove = new Move(possibleMoves[move],0);
+                        move.setMove(rand.nextInt(possibleMoves.length));
+                        currentState.makeMove(possibleMoves[move.GetMove()]);
+                        Move recentMove = new Move(possibleMoves[move.GetMove()],0);
                         System.out.println("The computer made the move: "+recentMove.toString());
-                        firstMove=false;
+                        firstMove.setFirstMove(false);;
                     }else if(getMoves.length<10){
                         Move bestMove = MiniMax.MiniMax(currentState, COM, Double.MIN_VALUE, Double.MAX_VALUE);
                         currentState.makeMove(bestMove.getPlay());
                         System.out.println("The computer made the move: "+bestMove.toString());
                     }else{
-                        move = rand.nextInt(getMoves.length);
-                        currentState.makeMove(getMoves[move]);
-                        Move recentMove = new Move(getMoves[move],0);
+                        move.setMove(rand.nextInt(getMoves.length));
+                        currentState.makeMove(getMoves[move.GetMove()]);
+                        Move recentMove = new Move(getMoves[move.GetMove()],0);
                         System.out.println("The computer made the move: "+recentMove.toString());
                     }
                 }
@@ -108,4 +108,65 @@ public class PlayGame{
             System.out.println("You Lose :(");
         }
     }
+    public static void Pmode(String I) {
+         switch(I){
+              case "yes":
+            	  practiceMode.setPracticeMode(true);
+              break;
+              default:
+              practiceMode.setPracticeMode(false);
+          }
+    }
+    public void Fmove(String Fmove) {
+    	switch(Fmove){
+            case "yes":
+            StateString.setString("Yes");
+            break;
+            default:
+            StateString.setString("Yes");
+        }
+    }
+    
+    
+    public static class move{
+    	private static int var =0;
+    	
+    	public static int GetMove() {
+    		return move.var;
+    	}
+    	public static void setMove(int val) {
+    		move.var = val;
+    	}
+    }
+    public static class StateString{
+    	private static String var ="yes";
+    	
+    	public static String GetStateString() {
+    		return StateString.var;
+    	}
+    	public static void setString(String val) {
+    		StateString.var = val;
+    	}
+    }
+    public static class practiceMode{
+    	private static boolean var = true;
+    	
+    	public static boolean GetPracticeMode() {
+    		return practiceMode.var;
+    	}
+    	public static void setPracticeMode(boolean val) {
+    		practiceMode.var = val;
+    	}
+    }
+    public static class firstMove{
+    	private static boolean var = true;
+    	
+    	public static boolean GetFirstMove() {
+    		return firstMove.var;
+    	}
+    	public static void setFirstMove(boolean val) {
+    		firstMove.var = val;
+    	}
+    }
 }
+    

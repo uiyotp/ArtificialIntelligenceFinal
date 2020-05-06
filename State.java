@@ -1,3 +1,5 @@
+package DandB;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList; 
 public class State{
@@ -204,3 +206,4 @@ public class State{
         return String.format("   %d      %d%n%d %s %d %s %d%n   %d      %d%n%d %s %d %s %d%n   %d      %d",board[0][0],board[0][1],board[1][0],box1,board[1][1],box2,board[1][2],board[2][0],board[2][1],board[3][0],box3,board[3][1],box4,board[3][2],board[4][0],board[4][1]);
     }
 }
+
